@@ -1,0 +1,54 @@
+fonts {
+  name: "font_ui"
+  font: "/gooey-h1996/fonts/font_ui.font"
+}
+textures {
+  name: "landback"
+  texture: "/gooey-h1996/images/h1996.atlas"
+}
+nodes {
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  type: TYPE_BOX
+  texture: "landback/checkbox_normal"
+  id: "box"
+  layer: "below"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 28.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "LABEL"
+  font: "font_ui"
+  id: "label"
+  pivot: PIVOT_W
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+  layer: "text"
+  inherit_alpha: true
+}
+layers {
+  name: "below"
+}
+layers {
+  name: "text"
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

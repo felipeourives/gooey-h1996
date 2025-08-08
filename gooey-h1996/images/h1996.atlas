@@ -1,0 +1,58 @@
+images {
+  image: "/gooey-h1996/images/button_normal.png"
+}
+images {
+  image: "/gooey-h1996/images/button_pressed.png"
+}
+images {
+  image: "/gooey-h1996/images/checkbox_checked_normal.png"
+}
+images {
+  image: "/gooey-h1996/images/checkbox_checked_pressed.png"
+}
+images {
+  image: "/gooey-h1996/images/checkbox_normal.png"
+}
+images {
+  image: "/gooey-h1996/images/checkbox_pressed.png"
+}
+images {
+  image: "/gooey-h1996/images/input.png"
+}
+images {
+  image: "/gooey-h1996/images/radio_checked_normal.png"
+}
+images {
+  image: "/gooey-h1996/images/radio_checked_pressed.png"
+}
+images {
+  image: "/gooey-h1996/images/radio_normal.png"
+}
+images {
+  image: "/gooey-h1996/images/radio_pressed.png"
+}
+images {
+  image: "/gooey-h1996/images/transparent1px.png"
+}
+images {
+  image: "/gooey-h1996/images/button_over.png"
+}
+images {
+  image: "/gooey-h1996/images/loading-square.png"
+}
+images {
+  image: "/gooey-h1996/images/tab_button_normal.png"
+}
+images {
+  image: "/gooey-h1996/images/tab_button_unactivated.png"
+}
+images {
+  image: "/gooey-h1996/images/tab_button_unactivated_over.png"
+}
+images {
+  image: "/gooey-h1996/images/scrollbar.png"
+}
+images {
+  image: "/gooey-h1996/images/arrow.png"
+}
+extrude_borders: 1

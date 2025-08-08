@@ -1,0 +1,4 @@
+font: "/gooey-h1996/fonts/ari-w9500.otf"
+material: "/builtins/fonts/font.material"
+size: 24
+characters: " !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"

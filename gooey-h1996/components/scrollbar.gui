@@ -1,0 +1,107 @@
+textures {
+  name: "landback"
+  texture: "/gooey-h1996/images/h1996.atlas"
+}
+nodes {
+  position {
+    y: 316.0
+  }
+  size {
+    x: 40.0
+    y: 40.0
+  }
+  type: TYPE_BOX
+  texture: "landback/scrollbar"
+  id: "up"
+  layer: "below"
+  inherit_alpha: true
+  slice9 {
+    x: 6.0
+    y: 5.0
+    z: 5.0
+    w: 10.0
+  }
+}
+nodes {
+  type: TYPE_BOX
+  texture: "landback/arrow"
+  id: "box"
+  parent: "up"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 40.0
+    y: 290.0
+  }
+  color {
+    x: 0.902
+    y: 0.902
+    z: 0.902
+  }
+  type: TYPE_BOX
+  id: "bounds"
+  pivot: PIVOT_S
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: 258.0
+  }
+  size {
+    x: 40.0
+    y: 75.0
+  }
+  type: TYPE_BOX
+  texture: "landback/scrollbar"
+  id: "handle"
+  parent: "bounds"
+  layer: "below"
+  inherit_alpha: true
+  slice9 {
+    x: 6.0
+    y: 5.0
+    z: 5.0
+    w: 10.0
+  }
+}
+nodes {
+  position {
+    y: -20.0
+  }
+  size {
+    x: 40.0
+    y: 40.0
+  }
+  type: TYPE_BOX
+  texture: "landback/scrollbar"
+  id: "down"
+  layer: "below"
+  inherit_alpha: true
+  slice9 {
+    x: 6.0
+    y: 5.0
+    z: 5.0
+    w: 10.0
+  }
+}
+nodes {
+  rotation {
+    z: 180.0
+  }
+  type: TYPE_BOX
+  texture: "landback/arrow"
+  id: "box1"
+  parent: "down"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+layers {
+  name: "below"
+}
+layers {
+  name: "text"
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
