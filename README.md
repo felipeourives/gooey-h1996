@@ -5,7 +5,7 @@ Gooey is a GUI system for the [Defold](https://www.defold.com) game engine.
 # H1996
 H1996 is a theme for Gooey (it used the Kenny and Dirtylarry themes as base).
 
-![](images/H1996.png)
+![](images/h1996.png)
 
 * This theme extends by including a Modal Tab component
 * You can also navagete between some fields by using the keys W, S and to click using Enter
