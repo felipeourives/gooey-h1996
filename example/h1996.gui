@@ -272,7 +272,19 @@ nodes {
 }
 nodes {
   type: TYPE_BOX
-  id: "dynamicscrollbar/box"
+  id: "dynamicscrollbar/up/bg"
+  parent: "dynamicscrollbar/up"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "dynamicscrollbar/up/label"
+  parent: "dynamicscrollbar/up/bg"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "dynamicscrollbar/arrow_up"
   parent: "dynamicscrollbar/up"
   template_node_child: true
 }
@@ -301,7 +313,19 @@ nodes {
 }
 nodes {
   type: TYPE_BOX
-  id: "dynamicscrollbar/box1"
+  id: "dynamicscrollbar/down/bg"
+  parent: "dynamicscrollbar/down"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "dynamicscrollbar/down/label"
+  parent: "dynamicscrollbar/down/bg"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  id: "dynamicscrollbar/arrow_down"
   parent: "dynamicscrollbar/down"
   template_node_child: true
 }

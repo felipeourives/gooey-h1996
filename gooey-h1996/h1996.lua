@@ -1,5 +1,5 @@
-local gooey = require "gooey.gooey"
-local utils = require "gooey.themes.utils"
+local gooey = require 'gooey.gooey'
+local utils = require 'gooey.themes.utils'
 
 local M = gooey.create_theme()
 
@@ -8,37 +8,37 @@ M.COLOR_OVER = vmath.vector4(0,0,0,1)
 M.COLOR_NORMAL = vmath.vector4(0,0,0,1)
 
 M.BUTTON_THEMES = {}
-M.BUTTON_THEMES["button_1"] = {}
-M.BUTTON_THEMES["button_1"].BUTTON_PRESSED = hash("button_pressed")
-M.BUTTON_THEMES["button_1"].BUTTON_OVER = hash("button_over")
-M.BUTTON_THEMES["button_1"].BUTTON_NORMAL = hash("button_normal")
-M.BUTTON_THEMES["button_1"].BUTTON_PRESSED_COLOR = M.COLOR_PRESSED
-M.BUTTON_THEMES["button_1"].BUTTON_OVER_COLOR = M.COLOR_OVER
-M.BUTTON_THEMES["button_1"].BUTTON_NORMAL_COLOR = M.COLOR_NORMAL
+M.BUTTON_THEMES['button_1'] = {}
+M.BUTTON_THEMES['button_1'].BUTTON_PRESSED = hash('button_pressed')
+M.BUTTON_THEMES['button_1'].BUTTON_OVER = hash('button_over')
+M.BUTTON_THEMES['button_1'].BUTTON_NORMAL = hash('button_normal')
+M.BUTTON_THEMES['button_1'].BUTTON_PRESSED_COLOR = M.COLOR_PRESSED
+M.BUTTON_THEMES['button_1'].BUTTON_OVER_COLOR = M.COLOR_OVER
+M.BUTTON_THEMES['button_1'].BUTTON_NORMAL_COLOR = M.COLOR_NORMAL
 
-M.CHEKCKBOX_PRESSED = hash("checkbox_pressed")
-M.CHEKCKBOX_CHECKED_NORMAL = hash("checkbox_checked_normal")
-M.CHEKCKBOX_CHECKED_PRESSED = hash("checkbox_checked_pressed")
-M.CHEKCKBOX_CHECKED_SELECTED = hash("checkbox_checked_selected")
-M.CHEKCKBOX_NORMAL = hash("checkbox_normal")
-M.CHEKCKBOX_NORMAL_SELECTED = hash("checkbox_normal_selected")
+M.CHEKCKBOX_PRESSED = hash('checkbox_pressed')
+M.CHEKCKBOX_CHECKED_NORMAL = hash('checkbox_checked_normal')
+M.CHEKCKBOX_CHECKED_PRESSED = hash('checkbox_checked_pressed')
+M.CHEKCKBOX_CHECKED_SELECTED = hash('checkbox_checked_selected')
+M.CHEKCKBOX_NORMAL = hash('checkbox_normal')
+M.CHEKCKBOX_NORMAL_SELECTED = hash('checkbox_normal_selected')
 
-M.RADIO_PRESSED = hash("radio_pressed")
-M.RADIO_CHECKED_PRESSED = hash("radio_checked_pressed")
-M.RADIO_CHECKED_NORMAL = hash("radio_checked_normal")
-M.RADIO_CHECKED_SELECTED = hash("radio_checked_selected")
-M.RADIO_NORMAL = hash("radio_normal")
-M.RADIO_NORMAL_SELECTED = hash("radio_normal_selected")
+M.RADIO_PRESSED = hash('radio_pressed')
+M.RADIO_CHECKED_PRESSED = hash('radio_checked_pressed')
+M.RADIO_CHECKED_NORMAL = hash('radio_checked_normal')
+M.RADIO_CHECKED_SELECTED = hash('radio_checked_selected')
+M.RADIO_NORMAL = hash('radio_normal')
+M.RADIO_NORMAL_SELECTED = hash('radio_normal_selected')
 
-M.LISTITEM_SELECTED = hash("button_pressed")
-M.LISTITEM_PRESSED = hash("button_pressed")
-M.LISTITEM_OVER = hash("button_normal")
-M.LISTITEM_NORMAL = hash("button_normal")
+M.LISTITEM_SELECTED = hash('button_pressed')
+M.LISTITEM_PRESSED = hash('button_pressed')
+M.LISTITEM_OVER = hash('button_normal')
+M.LISTITEM_NORMAL = hash('button_normal')
 
-M.TAB_SELECTED = hash("tab_button_normal")
-M.TAB_PRESSED = hash("tab_button_normal")
-M.TAB_OVER = hash("tab_button_unactivated_over")
-M.TAB_NORMAL = hash("tab_button_unactivated")
+M.TAB_SELECTED = hash('tab_button_normal')
+M.TAB_PRESSED = hash('tab_button_normal')
+M.TAB_OVER = hash('tab_button_unactivated_over')
+M.TAB_NORMAL = hash('tab_button_unactivated')
 
 M.fields = {}
 M.list_model_tabs = {}
@@ -92,16 +92,16 @@ function M.focused_field_enter()
 
 	local fn = field.fn
 
-	if field.type == "checkbox" then
+	if field.type == 'checkbox' then
 		local obj = M.checkbox(field.field_id)
 		obj.set_checked(not obj.checked)
 
-	elseif field.type == "radio" then
+	elseif field.type == 'radio' then
 		local obj = M.radio(field.field_id, field.group_id)
 		obj.set_selected(true)
 		gooey.radiogroup(field.group_id)
 
-	elseif field.type == "tab" then
+	elseif field.type == 'tab' then
 		M.list_model_tabs[M.current_group][field.list_id].selected_tab = M.field_focused_key
 		M.model_tabs(field.list_id, M.list_model_tabs[M.current_group][field.list_id].data)
 	end
@@ -149,39 +149,39 @@ local function refresh_button(button)
 	local theme = field.theme
 
 	if button.pressed then
-		gui.set_color(gui.get_node(field_id .. "/label"), M.BUTTON_THEMES[theme].BUTTON_PRESSED_COLOR)
+		gui.set_color(gui.get_node(field_id .. '/label'), M.BUTTON_THEMES[theme].BUTTON_PRESSED_COLOR)
 		gui.play_flipbook(button.node, M.BUTTON_THEMES[theme].BUTTON_PRESSED)
 
 	elseif button.over then
 
-		gui.set_color(gui.get_node(field_id .. "/label"), M.BUTTON_THEMES[theme].BUTTON_OVER_COLOR)
+		gui.set_color(gui.get_node(field_id .. '/label'), M.BUTTON_THEMES[theme].BUTTON_OVER_COLOR)
 		gui.play_flipbook(button.node, M.BUTTON_THEMES[theme].BUTTON_OVER)
 	else
 
-		gui.set_color(gui.get_node(field_id .. "/label"), M.BUTTON_THEMES[theme].BUTTON_NORMAL_COLOR)
+		gui.set_color(gui.get_node(field_id .. '/label'), M.BUTTON_THEMES[theme].BUTTON_NORMAL_COLOR)
 		gui.play_flipbook(button.node, M.BUTTON_THEMES[theme].BUTTON_NORMAL)
 	end
 end
 
 function M.button(node_id, theme, action_id, action, fn)
-	local field_key = hash(node_id .. "/bg")
+	local field_key = hash(node_id .. '/bg')
 
 	if theme == nil then
-		theme = "button_1"
+		theme = 'button_1'
 	end
 
 	if M.fields[M.current_group][field_key] == nil then
 
 		M.fields[M.current_group][field_key] = {}
 		M.fields[M.current_group][field_key].field_id = node_id
-		M.fields[M.current_group][field_key].type = "button"
+		M.fields[M.current_group][field_key].type = 'button'
 		M.fields[M.current_group][field_key].theme = theme
 		M.fields[M.current_group][field_key].node_main = {}
-		M.fields[M.current_group][field_key].node_main.id = node_id .. "/bg"
+		M.fields[M.current_group][field_key].node_main.id = node_id .. '/bg'
 		M.fields[M.current_group][field_key].node_main.normal = M.BUTTON_THEMES[theme].BUTTON_NORMAL
 		M.fields[M.current_group][field_key].node_main.selected = M.BUTTON_THEMES[theme].BUTTON_OVER
 		M.fields[M.current_group][field_key].node_second = {} 
-		M.fields[M.current_group][field_key].node_second. id = node_id .. "/label"
+		M.fields[M.current_group][field_key].node_second. id = node_id .. '/label'
 		M.fields[M.current_group][field_key].node_second.normal = M.BUTTON_THEMES[theme].BUTTON_NORMAL_COLOR
 		M.fields[M.current_group][field_key].node_second.selected = M.BUTTON_THEMES[theme].BUTTON_OVER_COLOR
 
@@ -217,14 +217,14 @@ local function refresh_checkbox(checkbox)
 end
 
 function M.checkbox(node_id, action_id, action, fn)
-	local field_key = hash(node_id .. "/box")
+	local field_key = hash(node_id .. '/box')
 
 	if M.fields[M.current_group][field_key] == nil then
 		M.fields[M.current_group][field_key] = {}
 		M.fields[M.current_group][field_key].field_id = node_id
-		M.fields[M.current_group][field_key].type = "checkbox"
+		M.fields[M.current_group][field_key].type = 'checkbox'
 		M.fields[M.current_group][field_key].node_main = {}
-		M.fields[M.current_group][field_key].node_main.id = node_id .. "/box"
+		M.fields[M.current_group][field_key].node_main.id = node_id .. '/box'
 		M.fields[M.current_group][field_key].node_main.normal = M.CHEKCKBOX_NORMAL
 		M.fields[M.current_group][field_key].node_main.selected = M.CHEKCKBOX_NORMAL_SELECTED
 
@@ -264,14 +264,14 @@ function M.radiogroup(group_id, action_id, action, fn)
 end
 
 function M.radio(node_id, group_id, action_id, action, fn)
-	local field_key = hash(node_id .. "/button")
+	local field_key = hash(node_id .. '/button')
 
 	if M.fields[M.current_group][field_key] == nil then
 		M.fields[M.current_group][field_key] = {}
 		M.fields[M.current_group][field_key].field_id = node_id
-		M.fields[M.current_group][field_key].type = "radio"
+		M.fields[M.current_group][field_key].type = 'radio'
 		M.fields[M.current_group][field_key].node_main = {}
-		M.fields[M.current_group][field_key].node_main.id = node_id .. "/button"
+		M.fields[M.current_group][field_key].node_main.id = node_id .. '/button'
 		M.fields[M.current_group][field_key].node_main.normal = M.RADIO_NORMAL
 		M.fields[M.current_group][field_key].node_main.selected = M.RADIO_NORMAL_SELECTED
 
@@ -287,7 +287,7 @@ function M.radio(node_id, group_id, action_id, action, fn)
 end
 
 local function refresh_input(input, config, node_id)
-	local cursor = gui.get_node(node_id .. "/cursor")
+	local cursor = gui.get_node(node_id .. '/cursor')
 	if input.selected then
 		gui.set_enabled(cursor, true)
 		gui.set_position(cursor, vmath.vector3(25 + input.total_width, 0, 0))
@@ -301,7 +301,7 @@ local function refresh_input(input, config, node_id)
 end
 
 function M.input(node_id, keyboard_type, action_id, action, config)
-	return gooey.input(node_id .. "/text", keyboard_type, action_id, action, config, function(input)
+	return gooey.input(node_id .. '/text', keyboard_type, action_id, action, config, function(input)
 		refresh_input(input, config, node_id)
 	end)
 end
@@ -328,7 +328,7 @@ local function update_listitem(list, item)
 		gui.play_flipbook(item.root, M.LISTITEM_NORMAL)
 	end
 
-	gui.set_color(item.nodes[hash(list.id .. "/listitem_text")], text_color)
+	gui.set_color(item.nodes[hash(list.id .. '/listitem_text')], text_color)
 	gui.set_position(item.root, pos)
 end
 
@@ -339,27 +339,40 @@ local function update_static_list(list)
 end
 
 function M.static_list(list_id, item_ids, action_id, action, config, fn)
-	return gooey.static_list(root_id, list_id .. "/stencil", item_ids, action_id, action, config, fn, update_static_list)
+	return gooey.static_list(root_id, list_id .. '/stencil', item_ids, action_id, action, config, fn, update_static_list)
 end
 
 local function update_dynamic_list(list)
 	for _,item in ipairs(list.items) do
 		update_listitem(list, item)
-		gui.set_text(item.nodes[hash(list.id .. "/listitem_text")], tostring(item.data or "-"))
+		gui.set_text(item.nodes[hash(list.id .. '/listitem_text')], tostring(item.data or '-'))
 	end
 end
 
 function M.dynamic_list(list_id, scrollbar_id, data, action_id, action, config, fn)
-	local list = gooey.dynamic_list(list_id, list_id .. "/stencil", list_id .. "/listitem_bg", data, action_id, action, config, fn, update_dynamic_list)
-	local scrollbar = nil
+	local list = gooey.dynamic_list(list_id, list_id .. '/stencil', list_id .. '/listitem_bg', data, action_id, action, config, fn, update_dynamic_list)
+	local scrollbar_element = nil
 	if scrollbar_id then
 		if list.scrolling then
-			scrollbar = gooey.vertical_scrollbar(scrollbar_id .. "/handle", scrollbar_id .. "/bounds").scroll_to(0, list.scroll.y)
+			scrollbar_element = gooey.vertical_scrollbar(scrollbar_id .. '/handle', scrollbar_id .. '/bounds').scroll_to(0, list.scroll.y)
 		else
-			scrollbar = gooey.vertical_scrollbar(scrollbar_id .. "/handle", scrollbar_id .. "/bounds", action_id, action, function(scrollbar)
-				gooey.dynamic_list(list_id, list_id .. "/stencil", list_id .. "/listitem_bg", data).scroll_to(0, scrollbar.scroll.y)
+			scrollbar_element = gooey.vertical_scrollbar(scrollbar_id .. '/handle', scrollbar_id .. '/bounds', action_id, action, function(scrollbar)
+				gooey.dynamic_list(list_id, list_id .. '/stencil', list_id .. '/listitem_bg', data).scroll_to(0, scrollbar.scroll.y)
 			end)
 		end
+
+		M.button(scrollbar_id .. '/up', 'button_1', action_id, action, function() 
+			local move = scrollbar_element.scroll.y - 0.1
+			if move < 0 then move = 0 end
+			scrollbar_element.scroll_to(0, move)
+			gooey.dynamic_list(list_id, list_id .. '/stencil', list_id .. '/listitem_bg', data).scroll_to(0, move)
+		end)
+		M.button(scrollbar_id .. '/down', 'button_1', action_id, action, function()
+			local move = scrollbar_element.scroll.y + 0.1
+			if move > 1 then move = 1 end
+			scrollbar_element.scroll_to(0, move)
+			gooey.dynamic_list(list_id, list_id .. '/stencil', list_id .. '/listitem_bg', data).scroll_to(0, move)
+		end)
 	end
 
 	return list
@@ -382,7 +395,7 @@ local function update_tab(list, item, index)
 		return nil
 	end
 
-	local tab_node_id = list.id .. "/" .. item.data
+	local tab_node_id = list.id .. '/' .. item.data
 
 	if M.fields[M.current_group][tab_node_id].node_main == nil then
 		M.fields[M.current_group][tab_node_id].node_main = {}
@@ -390,7 +403,7 @@ local function update_tab(list, item, index)
 		M.fields[M.current_group][tab_node_id].node_main.normal = M.TAB_NORMAL
 		M.fields[M.current_group][tab_node_id].node_main.selected = M.TAB_OVER
 		M.fields[M.current_group][tab_node_id].node_second = {} 
-		M.fields[M.current_group][tab_node_id].node_second.id = gui.get_id(item.nodes[hash(list.id .. "/label")])
+		M.fields[M.current_group][tab_node_id].node_second.id = gui.get_id(item.nodes[hash(list.id .. '/label')])
 		M.fields[M.current_group][tab_node_id].node_second.normal = M.COLOR_NORMAL
 		M.fields[M.current_group][tab_node_id].node_second.selected = M.COLOR_OVER
 		M.fields[M.current_group][tab_node_id].node_main.id = gui.get_id(item.root)
@@ -398,11 +411,9 @@ local function update_tab(list, item, index)
 
 		M.fields[M.current_group][tab_node_id].obj = {}
 		M.fields[M.current_group][tab_node_id].obj.node = item.root
-
-		print(1, M.fields[M.current_group][tab_node_id].node_main.position)
 	end
 
-	gui.set_text(item.nodes[hash(list.id .. "/label")], tostring(M.fields[M.current_group][tab_node_id].label or "-"))
+	gui.set_text(item.nodes[hash(list.id .. '/label')], tostring(M.fields[M.current_group][tab_node_id].label or '-'))
 
 	local pos = vmath.vector3(
 					M.fields[M.current_group][tab_node_id].node_main.position.x,
@@ -455,7 +466,7 @@ local function update_tab(list, item, index)
 	end
 
 	if text_color ~= nil then
-		gui.set_color(item.nodes[hash(list.id .. "/label")], text_color)
+		gui.set_color(item.nodes[hash(list.id .. '/label')], text_color)
 	end
 
 	gui.set_position(item.root, pos)
@@ -472,7 +483,7 @@ end
 function M.model_tabs(list_id, data, action_id, action, config, fn)
 
 	local data_list = {}
-	local first_tab_id = list_id .. "/tab1"
+	local first_tab_id = list_id .. '/tab1'
 
 	if M.list_model_tabs[M.current_group] == nil then
 		M.list_model_tabs[M.current_group] = {}
@@ -488,12 +499,12 @@ function M.model_tabs(list_id, data, action_id, action, config, fn)
 
 		if M.fields[M.current_group][tab.id] == nil then
 
-			local tab_node_id = list_id .. "/" .. tab.id
+			local tab_node_id = list_id .. '/' .. tab.id
 
 			if M.fields[M.current_group][tab_node_id] == nil then
 				M.fields[M.current_group][tab_node_id] = {}
 				M.fields[M.current_group][tab_node_id].list_id = list_id
-				M.fields[M.current_group][tab_node_id].type = "tab"
+				M.fields[M.current_group][tab_node_id].type = 'tab'
 				M.fields[M.current_group][tab_node_id].label = tab.label
 				M.fields[M.current_group][tab_node_id].content_id = tab.content_id
 				M.fields[M.current_group][tab_node_id].fn = fn
@@ -505,11 +516,11 @@ function M.model_tabs(list_id, data, action_id, action, config, fn)
 		table.insert(data_list, tab.id)
 	end
 
-	return gooey.horizontal_dynamic_list(list_id, list_id .. "/tabs", first_tab_id, data_list, action_id, action, config, fn, update_list_tabs)
+	return gooey.horizontal_dynamic_list(list_id, list_id .. '/tabs', first_tab_id, data_list, action_id, action, config, fn, update_list_tabs)
 end
 
 function M.scrollbar(scrollbar_id, action_id, action, fn)
-	return gooey.vertical_scrollbar(scrollbar_id .. "/handle", scrollbar_id .. "/bounds")
+	return gooey.vertical_scrollbar(scrollbar_id .. '/handle', scrollbar_id .. '/bounds')
 end
 
 function M.loading(node_id, percent, color)
@@ -517,7 +528,7 @@ function M.loading(node_id, percent, color)
 	local percent_piece = 100 / num_squares
 
 	for i = 1, num_squares do
-		local sq_id = node_id .. "/s" .. i
+		local sq_id = node_id .. '/s' .. i
 		local sq_node = gui.get_node(sq_id)
 
 		if percent >= percent_piece * i then
