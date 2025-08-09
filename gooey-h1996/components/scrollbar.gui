@@ -44,40 +44,10 @@ nodes {
   }
 }
 nodes {
-  position {
-    y: 3.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  type: TYPE_TEXT
-  font: "font_ui"
-  id: "up/label"
-  outline {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-  shadow {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-  parent: "up/bg"
-  layer: "text"
-  inherit_alpha: true
-}
-nodes {
   type: TYPE_BOX
   texture: "landback/arrow"
-  id: "arrow_up"
-  parent: "up"
+  id: "up/label"
+  parent: "up/bg"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
@@ -155,43 +125,13 @@ nodes {
   }
 }
 nodes {
-  position {
-    y: 3.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  type: TYPE_TEXT
-  font: "font_ui"
-  id: "down/label"
-  outline {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-  shadow {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-  parent: "down/bg"
-  layer: "text"
-  inherit_alpha: true
-}
-nodes {
   rotation {
     z: 180.0
   }
   type: TYPE_BOX
   texture: "landback/arrow"
-  id: "arrow_down"
-  parent: "down"
+  id: "down/label"
+  parent: "down/bg"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }

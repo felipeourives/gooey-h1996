@@ -3,11 +3,11 @@ key_trigger {
   action: "backspace"
 }
 key_trigger {
-  input: KEY_W
+  input: KEY_UP
   action: "top"
 }
 key_trigger {
-  input: KEY_S
+  input: KEY_DOWN
   action: "down"
 }
 key_trigger {

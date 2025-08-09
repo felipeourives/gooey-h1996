@@ -55,4 +55,16 @@ images {
 images {
   image: "/gooey-h1996/images/arrow.png"
 }
+images {
+  image: "/gooey-h1996/images/checkbox_checked_selected.png"
+}
+images {
+  image: "/gooey-h1996/images/checkbox_normal_selected.png"
+}
+images {
+  image: "/gooey-h1996/images/radio_checked_selected.png"
+}
+images {
+  image: "/gooey-h1996/images/radio_normal_selected.png"
+}
 extrude_borders: 1

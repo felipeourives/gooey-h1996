@@ -147,23 +147,36 @@ local function refresh_button(button)
 	local field  = M.fields[M.current_group][button_id]
 	local field_id = field.field_id
 	local theme = field.theme
+	local label_node = gui.get_node(field_id .. '/label')
 
 	if button.pressed then
-		gui.set_color(gui.get_node(field_id .. '/label'), M.BUTTON_THEMES[theme].BUTTON_PRESSED_COLOR)
+		gui.set_color(label_node, M.BUTTON_THEMES[theme].BUTTON_PRESSED_COLOR)
 		gui.play_flipbook(button.node, M.BUTTON_THEMES[theme].BUTTON_PRESSED)
+
+		field.pressed_count = field.pressed_count or 0
+		field.pressed_count = field.pressed_count + 1
+
+		if field.repeat_on_pressed
+		and field.pressed_count % 25 == 0 then
+			field.fn(button)
+		end
+
+		gui.set_position(label_node, vmath.vector3(2, -2, 0))
 
 	elseif button.over then
 
-		gui.set_color(gui.get_node(field_id .. '/label'), M.BUTTON_THEMES[theme].BUTTON_OVER_COLOR)
+		gui.set_color(label_node, M.BUTTON_THEMES[theme].BUTTON_OVER_COLOR)
+		gui.set_position(label_node, vmath.vector3())
 		gui.play_flipbook(button.node, M.BUTTON_THEMES[theme].BUTTON_OVER)
 	else
 
-		gui.set_color(gui.get_node(field_id .. '/label'), M.BUTTON_THEMES[theme].BUTTON_NORMAL_COLOR)
+		gui.set_color(label_node, M.BUTTON_THEMES[theme].BUTTON_NORMAL_COLOR)
+		gui.set_position(label_node, vmath.vector3())
 		gui.play_flipbook(button.node, M.BUTTON_THEMES[theme].BUTTON_NORMAL)
 	end
 end
 
-function M.button(node_id, theme, action_id, action, fn)
+function M.button(node_id, theme, action_id, action, fn, repeat_on_pressed)
 	local field_key = hash(node_id .. '/bg')
 
 	if theme == nil then
@@ -184,6 +197,8 @@ function M.button(node_id, theme, action_id, action, fn)
 		M.fields[M.current_group][field_key].node_second. id = node_id .. '/label'
 		M.fields[M.current_group][field_key].node_second.normal = M.BUTTON_THEMES[theme].BUTTON_NORMAL_COLOR
 		M.fields[M.current_group][field_key].node_second.selected = M.BUTTON_THEMES[theme].BUTTON_OVER_COLOR
+		M.fields[M.current_group][field_key].fn = fn
+		M.fields[M.current_group][field_key].repeat_on_pressed = repeat_on_pressed
 
 		table.insert(M.fields_by_index[M.current_group] , field_key)
 	end
@@ -290,13 +305,26 @@ local function refresh_input(input, config, node_id)
 	local cursor = gui.get_node(node_id .. '/cursor')
 	if input.selected then
 		gui.set_enabled(cursor, true)
-		gui.set_position(cursor, vmath.vector3(25 + input.total_width, 0, 0))
-		gui.cancel_animation(cursor, gui.PROP_COLOR)
-		gui.set_color(cursor, vmath.vector4(1))
-		gui.animate(cursor, gui.PROP_COLOR, M.COLOR_NORMAL, gui.EASING_INSINE, 0.8, 0, nil, gui.PLAYBACK_LOOP_PINGPONG)
+		gui.set_position(cursor, vmath.vector3(30 + input.total_width, 0, 0))
+
+		if input.cursor_timer == nil then
+			input.cursor_timer = timer.delay(0.8, true, function()
+
+				input.cursor_timer_enabled = input.cursor_timer_enabled or false
+				if input.cursor_timer_enabled then
+					input.cursor_timer_enabled = false
+				else
+					input.cursor_timer_enabled = true
+				end
+
+				gui.set_enabled(cursor, input.cursor_timer_enabled)
+			end)
+		end
 	else
 		gui.set_enabled(cursor, false)
-		gui.cancel_animation(cursor, gui.PROP_COLOR)
+		if input.cursor_timer then
+			timer.cancel(input.cursor_timer)
+		end
 	end
 end
 
@@ -362,17 +390,17 @@ function M.dynamic_list(list_id, scrollbar_id, data, action_id, action, config, 
 		end
 
 		M.button(scrollbar_id .. '/up', 'button_1', action_id, action, function() 
-			local move = scrollbar_element.scroll.y - 0.1
+			local move = scrollbar_element.scroll.y - 0.08
 			if move < 0 then move = 0 end
 			scrollbar_element.scroll_to(0, move)
 			gooey.dynamic_list(list_id, list_id .. '/stencil', list_id .. '/listitem_bg', data).scroll_to(0, move)
-		end)
+		end, true)
 		M.button(scrollbar_id .. '/down', 'button_1', action_id, action, function()
-			local move = scrollbar_element.scroll.y + 0.1
+			local move = scrollbar_element.scroll.y + 0.08
 			if move > 1 then move = 1 end
 			scrollbar_element.scroll_to(0, move)
 			gooey.dynamic_list(list_id, list_id .. '/stencil', list_id .. '/listitem_bg', data).scroll_to(0, move)
-		end)
+		end, true)
 	end
 
 	return list
@@ -385,7 +413,10 @@ function M.group(id, fn)
 		M.fields[M.current_group] = {}
 	end
 
-	M.fields_by_index[M.current_group] = {}
+	if M.fields_by_index[M.current_group] == nil then
+		M.fields_by_index[M.current_group] = {}
+	end
+
 	return gooey.group(id, fn)
 end
 

@@ -29,13 +29,13 @@ nodes {
     x: 23.0
   }
   size {
-    x: 2.0
+    x: 4.0
     y: 40.0
   }
   color {
-    x: 0.408
-    y: 0.533
-    z: 0.533
+    x: 0.0
+    y: 0.0
+    z: 0.0
   }
   type: TYPE_BOX
   id: "cursor"
