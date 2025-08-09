@@ -8,7 +8,7 @@ function init(self)
 
 	local group = landback_ui.group('group1', function()
 		landback_ui.init()
-		landback_ui.button('button1', 'button_1')
+		landback_ui.button('button2', 'button_1')
 		landback_ui.button('button1', 'button_1')
 		landback_ui.checkbox('checkbox').set_checked(true)
 		landback_ui.radio('radio1')

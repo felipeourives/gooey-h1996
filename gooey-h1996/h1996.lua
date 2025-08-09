@@ -539,9 +539,9 @@ function M.model_tabs(list_id, data, action_id, action, config, fn)
 				M.fields[M.current_group][tab_node_id].label = tab.label
 				M.fields[M.current_group][tab_node_id].content_id = tab.content_id
 				M.fields[M.current_group][tab_node_id].fn = fn
-			end
 
-			table.insert(M.fields_by_index[M.current_group], tab_node_id)
+				table.insert(M.fields_by_index[M.current_group], tab_node_id)
+			end
 		end
 		
 		table.insert(data_list, tab.id)
