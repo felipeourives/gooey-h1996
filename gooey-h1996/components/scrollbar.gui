@@ -3,7 +3,7 @@ fonts {
   font: "/gooey-h1996/fonts/font_ui.font"
 }
 textures {
-  name: "landback"
+  name: "h1996"
   texture: "/gooey-h1996/images/h1996.atlas"
 }
 nodes {
@@ -31,7 +31,7 @@ nodes {
     y: 40.0
   }
   type: TYPE_BOX
-  texture: "landback/button_normal"
+  texture: "h1996/button_normal"
   id: "up/bg"
   parent: "up"
   layer: "below"
@@ -45,7 +45,7 @@ nodes {
 }
 nodes {
   type: TYPE_BOX
-  texture: "landback/arrow"
+  texture: "h1996/arrow"
   id: "up/label"
   parent: "up/bg"
   inherit_alpha: true
@@ -75,7 +75,7 @@ nodes {
     y: 75.0
   }
   type: TYPE_BOX
-  texture: "landback/scrollbar"
+  texture: "h1996/scrollbar"
   id: "handle"
   parent: "bounds"
   layer: "below"
@@ -112,7 +112,7 @@ nodes {
     y: 40.0
   }
   type: TYPE_BOX
-  texture: "landback/button_normal"
+  texture: "h1996/button_normal"
   id: "down/bg"
   parent: "down"
   layer: "below"
@@ -129,7 +129,7 @@ nodes {
     z: 180.0
   }
   type: TYPE_BOX
-  texture: "landback/arrow"
+  texture: "h1996/arrow"
   id: "down/label"
   parent: "down/bg"
   inherit_alpha: true

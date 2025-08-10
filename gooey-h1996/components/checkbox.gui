@@ -3,7 +3,7 @@ fonts {
   font: "/gooey-h1996/fonts/font_ui.font"
 }
 textures {
-  name: "landback"
+  name: "h1996"
   texture: "/gooey-h1996/images/h1996.atlas"
 }
 nodes {
@@ -12,7 +12,7 @@ nodes {
     y: 0.5
   }
   type: TYPE_BOX
-  texture: "landback/checkbox_normal"
+  texture: "h1996/checkbox_normal"
   id: "box"
   layer: "below"
   inherit_alpha: true

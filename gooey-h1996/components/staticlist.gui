@@ -1,5 +1,5 @@
 textures {
-  name: "landback"
+  name: "h1996"
   texture: "/gooey-h1996/images/h1996.atlas"
 }
 nodes {
@@ -8,7 +8,7 @@ nodes {
     y: 320.0
   }
   type: TYPE_BOX
-  texture: "landback/button_pressed"
+  texture: "h1996/button_pressed"
   id: "bg"
   pivot: PIVOT_N
   inherit_alpha: true
@@ -28,7 +28,7 @@ nodes {
     y: 300.0
   }
   type: TYPE_BOX
-  texture: "landback/transparent1px"
+  texture: "h1996/transparent1px"
   id: "stencil"
   pivot: PIVOT_N
   parent: "bg"

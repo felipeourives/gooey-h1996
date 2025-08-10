@@ -3,7 +3,7 @@ fonts {
   font: "/gooey-h1996/fonts/font_ui.font"
 }
 textures {
-  name: "landback"
+  name: "h1996"
   texture: "/gooey-h1996/images/h1996.atlas"
 }
 nodes {
@@ -11,7 +11,7 @@ nodes {
     y: 246.0
   }
   type: TYPE_BOX
-  texture: "landback/transparent1px"
+  texture: "h1996/transparent1px"
   id: "modal-head"
   pivot: PIVOT_NE
   inherit_alpha: true
@@ -27,7 +27,7 @@ nodes {
     y: 300.0
   }
   type: TYPE_BOX
-  texture: "landback/transparent1px"
+  texture: "h1996/transparent1px"
   id: "tabs"
   pivot: PIVOT_NW
   parent: "modal-head"
@@ -43,7 +43,7 @@ nodes {
     y: 88.0
   }
   type: TYPE_BOX
-  texture: "landback/tab_button_normal"
+  texture: "h1996/tab_button_normal"
   id: "tab1"
   pivot: PIVOT_N
   parent: "tabs"
