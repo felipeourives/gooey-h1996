@@ -210,6 +210,7 @@ nodes {
   id: "dynamiclist/bg"
   parent: "dynamiclist"
   overridden_fields: 4
+  overridden_fields: 46
   template_node_child: true
 }
 nodes {
@@ -228,6 +229,7 @@ nodes {
   overridden_fields: 1
   overridden_fields: 4
   overridden_fields: 14
+  overridden_fields: 46
   template_node_child: true
 }
 nodes {
@@ -241,6 +243,7 @@ nodes {
   parent: "dynamiclist/stencil"
   overridden_fields: 1
   overridden_fields: 14
+  overridden_fields: 45
   template_node_child: true
 }
 nodes {

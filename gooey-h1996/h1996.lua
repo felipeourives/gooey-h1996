@@ -442,6 +442,7 @@ function M.dynamic_list(list_id, scrollbar_id, data, action_id, action, config, 
 			scrollbar_element.scroll_to(0, move)
 			gooey.dynamic_list(list_id, list_id .. '/stencil', list_id .. '/listitem_bg', data).scroll_to(0, move)
 		end, true)
+
 		M.button(scrollbar_id .. '/down', 'button_1', action_id, action, function()
 			local move = scrollbar_element.scroll.y + 0.08
 			if move > 1 then move = 1 end
@@ -496,131 +497,131 @@ local function update_tab(list, item, index)
 	local pos = vmath.vector3(
 	M.fields[M.current_group][tab_node_id].node_main.position.x,
 	M.fields[M.current_group][tab_node_id].node_main.position.y,
-	0
-)
+		0
+	)
 
-local size = vmath.vector3(item.size.x, item.size.y, 0)
-local text_color = nil
+	local size = vmath.vector3(item.size.x, item.size.y, 0)
+	local text_color = nil
 
-pos.x = item.size.x * index + item.size.x/2
+	pos.x = item.size.x * index + item.size.x/2
 
-if index == 0 then
-	pos.x = item.size.x/2
-end
+	if index == 0 then
+		pos.x = item.size.x/2
+	end
 
-local content_node = nil
-local enable_content_node = false
+	local content_node = nil
+	local enable_content_node = false
 
-if M.fields[M.current_group][tab_node_id] ~= nil and M.fields[M.current_group][tab_node_id].content_id ~= nil then
-	content_node = gui.get_node(M.fields[M.current_group][tab_node_id].content_id )
-end
+	if M.fields[M.current_group][tab_node_id] ~= nil and M.fields[M.current_group][tab_node_id].content_id ~= nil then
+		content_node = gui.get_node(M.fields[M.current_group][tab_node_id].content_id )
+	end
 
-pos.y = pos.y - 10
-size.y = size.y - 10
+	pos.y = pos.y - 10
+	size.y = size.y - 10
 
-if tab_node_id == M.list_model_tabs[M.current_group][list.id].selected_tab then
-	gui.play_flipbook(item.root, M.TAB_PRESSED)
-	text_color = M.COLOR_NORMAL
-	enable_content_node = true
-	pos.y = pos.y + 10
-	size.y = size.y + 10
-elseif item == list.pressed_item then
-	M.list_model_tabs[M.current_group][list.id].selected_tab = tab_node_id
-	gui.play_flipbook(item.root, M.TAB_SELECTED)
-	text_color = M.COLOR_NORMAL
-elseif item == list.over_item_now then
-	gui.play_flipbook(item.root, M.TAB_OVER)
-	text_color = M.COLOR_OVER
-elseif item == list.out_item_now then
-	gui.play_flipbook(item.root, M.TAB_NORMAL)
-	text_color = M.COLOR_PRESSED
-elseif item ~= list.over_item then
-	gui.play_flipbook(item.root, M.TAB_NORMAL)
-	text_color = M.COLOR_PRESSED
-end
+	if tab_node_id == M.list_model_tabs[M.current_group][list.id].selected_tab then
+		gui.play_flipbook(item.root, M.TAB_PRESSED)
+		text_color = M.COLOR_NORMAL
+		enable_content_node = true
+		pos.y = pos.y + 10
+		size.y = size.y + 10
+	elseif item == list.pressed_item then
+		M.list_model_tabs[M.current_group][list.id].selected_tab = tab_node_id
+		gui.play_flipbook(item.root, M.TAB_SELECTED)
+		text_color = M.COLOR_NORMAL
+	elseif item == list.over_item_now then
+		gui.play_flipbook(item.root, M.TAB_OVER)
+		text_color = M.COLOR_OVER
+	elseif item == list.out_item_now then
+		gui.play_flipbook(item.root, M.TAB_NORMAL)
+		text_color = M.COLOR_PRESSED
+	elseif item ~= list.over_item then
+		gui.play_flipbook(item.root, M.TAB_NORMAL)
+		text_color = M.COLOR_PRESSED
+	end
 
-if content_node ~= nil then
-	gui.set_enabled(content_node, enable_content_node)
-end
+	if content_node ~= nil then
+		gui.set_enabled(content_node, enable_content_node)
+	end
 
-if text_color ~= nil then
-	gui.set_color(item.nodes[hash(list.id .. '/label')], text_color)
-end
+	if text_color ~= nil then
+		gui.set_color(item.nodes[hash(list.id .. '/label')], text_color)
+	end
 
-gui.set_position(item.root, pos)
-gui.set_size(item.root, size)
-end
+	gui.set_position(item.root, pos)
+	gui.set_size(item.root, size)
+	end
 
-local function update_list_tabs(list)
+	local function update_list_tabs(list)
 
-for index, item in ipairs(list.items) do
-	update_tab(list, item, index - 1)
-end
+	for index, item in ipairs(list.items) do
+		update_tab(list, item, index - 1)
+	end
 end
 
 function M.model_tabs(list_id, data, action_id, action, config, fn)
 
-action.x = action.x or 0
-action.y = action.y or 0
+	action.x = action.x or 0
+	action.y = action.y or 0
 
-local data_list = {}
-local template_tab_id = list_id .. '/tab1'
+	local data_list = {}
+	local template_tab_id = list_id .. '/tab1'
 
-if M.list_model_tabs[M.current_group] == nil then
-	M.list_model_tabs[M.current_group] = {}
-end
-
-if M.list_model_tabs[M.current_group][list_id] == nil then
-	M.list_model_tabs[M.current_group][list_id] = {}
-	M.list_model_tabs[M.current_group][list_id].selected_tab = list_id .. '/' .. data[1].id
-	M.list_model_tabs[M.current_group][list_id].data = data
-end
-
-for _, tab in ipairs(data) do
-
-	if M.fields[M.current_group][tab.id] == nil then
-
-		local tab_node_id = list_id .. '/' .. tab.id
-
-		if M.fields[M.current_group][tab_node_id] == nil then
-			M.fields[M.current_group][tab_node_id] = {}
-			M.fields[M.current_group][tab_node_id].list_id = list_id
-			M.fields[M.current_group][tab_node_id].type = 'tab'
-			M.fields[M.current_group][tab_node_id].label = tab.label
-			M.fields[M.current_group][tab_node_id].content_id = tab.content_id
-			M.fields[M.current_group][tab_node_id].fn = fn
-
-			table.insert(M.fields_by_index[M.current_group], tab_node_id)
-		end
+	if M.list_model_tabs[M.current_group] == nil then
+		M.list_model_tabs[M.current_group] = {}
 	end
 
-	table.insert(data_list, tab.id)
-end
+	if M.list_model_tabs[M.current_group][list_id] == nil then
+		M.list_model_tabs[M.current_group][list_id] = {}
+		M.list_model_tabs[M.current_group][list_id].selected_tab = list_id .. '/' .. data[1].id
+		M.list_model_tabs[M.current_group][list_id].data = data
+	end
 
-return gooey.horizontal_dynamic_list(list_id, list_id .. '/tabs', template_tab_id, data_list, action_id, action, config, fn, update_list_tabs)
+	for _, tab in ipairs(data) do
+
+		if M.fields[M.current_group][tab.id] == nil then
+
+			local tab_node_id = list_id .. '/' .. tab.id
+
+			if M.fields[M.current_group][tab_node_id] == nil then
+				M.fields[M.current_group][tab_node_id] = {}
+				M.fields[M.current_group][tab_node_id].list_id = list_id
+				M.fields[M.current_group][tab_node_id].type = 'tab'
+				M.fields[M.current_group][tab_node_id].label = tab.label
+				M.fields[M.current_group][tab_node_id].content_id = tab.content_id
+				M.fields[M.current_group][tab_node_id].fn = fn
+
+				table.insert(M.fields_by_index[M.current_group], tab_node_id)
+			end
+		end
+
+		table.insert(data_list, tab.id)
+	end
+
+	return gooey.horizontal_dynamic_list(list_id, list_id .. '/tabs', template_tab_id, data_list, action_id, action, config, fn, update_list_tabs)
 end
 
 function M.scrollbar(scrollbar_id, action_id, action, fn)
-return gooey.vertical_scrollbar(scrollbar_id .. '/handle', scrollbar_id .. '/bounds')
+	return gooey.vertical_scrollbar(scrollbar_id .. '/handle', scrollbar_id .. '/bounds')
 end
 
 function M.loading(node_id, percent, color)
-local num_squares = 4
-local percent_piece = 100 / num_squares
+	local num_squares = 4
+	local percent_piece = 100 / num_squares
 
-for i = 1, num_squares do
-	local sq_id = node_id .. '/s' .. i
-	local sq_node = gui.get_node(sq_id)
+	for i = 1, num_squares do
+		local sq_id = node_id .. '/s' .. i
+		local sq_node = gui.get_node(sq_id)
 
-	if percent >= percent_piece * i then
-		gui.set_color(sq_node, color)
+		if percent >= percent_piece * i then
+			gui.set_color(sq_node, color)
+		end
 	end
-end
 end
 
 function M.init()
-M.field_focused_index = nil
-M.field_focused_key = nil
+	M.field_focused_index = nil
+	M.field_focused_key = nil
 end
 
 return M

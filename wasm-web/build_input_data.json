@@ -1,0 +1,17 @@
+{
+  "project_git" : {
+    "sha1" : "a7d39ad3e999f53ad07984e18d236a389d9978da",
+    "origin" : "https://github.com/felipeourives/gooey-h1996.git",
+    "branch" : "main"
+  },
+  "bob_arguments" : {
+    "sha1" : "1aafd0a262ff40214ed7f51302d92fa587c607ef",
+    "version" : "1.10.4",
+    "timestamp" : "2025-08-04 12:05:46"
+  },
+  "defold_sdk" : "1aafd0a262ff40214ed7f51302d92fa587c607ef",
+  "dependencies" : [ {
+    "link" : "https://github.com/britzl/gooey/archive/10.0.0.zip",
+    "md5" : "8D0DEC3D930EEDC7B697F865DF333CAC"
+  } ]
+}
