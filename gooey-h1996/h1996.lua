@@ -424,6 +424,21 @@ local function update_dynamic_list(list)
 	end
 end
 
+function M.dynamic_list_scroll(list_id, scrollbar_id, data, scrollbar_element, positive)
+
+	local multi = 1
+
+	if not positive then
+		multi = -1
+	end
+
+	local move = scrollbar_element.scroll.y + 0.08 * multi
+	if move > 1 then move = 1 end
+
+	scrollbar_element.scroll_to(0, move)
+	gooey.dynamic_list(list_id, list_id .. '/stencil', list_id .. '/listitem_bg', data).scroll_to(0, move)
+end
+
 function M.dynamic_list(list_id, scrollbar_id, data, action_id, action, config, fn)
 	local list = gooey.dynamic_list(list_id, list_id .. '/stencil', list_id .. '/listitem_bg', data, action_id, action, config, fn, update_dynamic_list)
 	local scrollbar_element = nil
@@ -437,18 +452,22 @@ function M.dynamic_list(list_id, scrollbar_id, data, action_id, action, config, 
 		end
 
 		M.button(scrollbar_id .. '/up', 'button_1', action_id, action, function() 
-			local move = scrollbar_element.scroll.y - 0.08
-			if move < 0 then move = 0 end
-			scrollbar_element.scroll_to(0, move)
-			gooey.dynamic_list(list_id, list_id .. '/stencil', list_id .. '/listitem_bg', data).scroll_to(0, move)
+			M.dynamic_list_scroll(list_id, scrollbar_id, data, scrollbar_element, false)
 		end, true)
 
 		M.button(scrollbar_id .. '/down', 'button_1', action_id, action, function()
-			local move = scrollbar_element.scroll.y + 0.08
-			if move > 1 then move = 1 end
-			scrollbar_element.scroll_to(0, move)
-			gooey.dynamic_list(list_id, list_id .. '/stencil', list_id .. '/listitem_bg', data).scroll_to(0, move)
+			M.dynamic_list_scroll(list_id, scrollbar_id, data, scrollbar_element, true)
 		end, true)
+
+		if action_id == hash('mouse_wheel_up')
+		and gui.pick_node(list.stencil, action.x, action.y) then
+			M.dynamic_list_scroll(list_id, scrollbar_id, data, scrollbar_element, false)
+		end
+
+		if action_id == hash('mouse_wheel_down')
+		and gui.pick_node(list.stencil, action.x, action.y) then
+			M.dynamic_list_scroll(list_id, scrollbar_id, data, scrollbar_element, true)
+		end
 	end
 
 	return list
