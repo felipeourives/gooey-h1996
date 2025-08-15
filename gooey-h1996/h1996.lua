@@ -434,6 +434,7 @@ function M.dynamic_list_scroll(list_id, scrollbar_id, data, scrollbar_element, p
 
 	local move = scrollbar_element.scroll.y + 0.08 * multi
 	if move > 1 then move = 1 end
+	if move < 0 then move = 0 end
 
 	scrollbar_element.scroll_to(0, move)
 	gooey.dynamic_list(list_id, list_id .. '/stencil', list_id .. '/listitem_bg', data).scroll_to(0, move)
